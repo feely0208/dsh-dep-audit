@@ -1,5 +1,7 @@
 # @deepwhale-cn/dsh-dep-audit
 
+[![Listed on dsh-plugin.org](https://dsh-plugin.org/badges/listed.svg)](https://dsh-plugin.org/plugins/feely0208/dsh-dep-audit)
+
 **依赖投毒与风险** —— 装包即执行的脚本、过宽版本、非 registry 来源。
 
 ## 不装它会怎样
