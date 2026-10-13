@@ -1,0 +1,8 @@
+{
+  "id": "DEP-LIFECYCLE",
+  "title": "依赖带 install 生命周期脚本（投毒主要载体）",
+  "severity": "high",
+  "source": "npm Docs — scripts: preinstall/install/postinstall；近年来 npm 投毒事件（event-stream、ua-parser-js、node-ipc、colors/faker）均通过生命周期脚本执行任意代码",
+  "advice": "这类脚本在你 `npm install` 时执行 —— **不需要你 import 它**，装着就中招。请确认这个包是否真的需要安装期脚本（多数包不需要）。可用 npm 的 ignore-scripts 配置或 allow 列表收敛。",
+  "check": { "type": "dependency-script", "hooks": ["preinstall", "install", "postinstall"], "allow": ["esbuild", "sharp", "puppeteer", "playwright", "better-sqlite3", "node-sass"] }
+}

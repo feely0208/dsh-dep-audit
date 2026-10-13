@@ -1,0 +1,8 @@
+{
+  "id": "DEP-WILDCARD",
+  "title": "依赖版本过宽（* 或 latest）",
+  "severity": "medium",
+  "source": "npm Docs — semver: `*` 匹配任意版本；`latest` 表示 dist-tag 最新",
+  "advice": "`*` / `latest` 等于把「装到哪个版本」交给上游决定 —— 上游发新版本（或被投毒）你立刻受影响，且无法复现。改成明确的 semver 范围或精确版本。",
+  "check": { "type": "file-pattern", "pattern": "\"[^\"]+\":\\s*\"(\\*|latest)\"", "paths": ["package.json"] }
+}

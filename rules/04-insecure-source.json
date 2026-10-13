@@ -1,0 +1,8 @@
+{
+  "id": "DEP-INSECURE-SOURCE",
+  "title": "依赖来自非 registry 来源（git / http / 本地路径）",
+  "severity": "medium",
+  "source": "npm Docs — package.json 依赖协议：git+ / http:// / file: / link:；npm Docs — 供应链安全建议",
+  "advice": "这类依赖绕过 registry 的完整性校验与审计，且 http:// 明文传输。git 依赖还常指向分支（内容会变）。若非必要，改成 registry 上的正式包；必须用 git 时锁定到 commit SHA。",
+  "check": { "type": "file-pattern", "pattern": "\"[^\"]+\":\\s*\"(git\\+|git://|http://|file:|link:)", "paths": ["package.json"] }
+}

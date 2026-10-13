@@ -1,0 +1,4 @@
+# @deepwhale-cn/dsh-dep-audit 的组合层
+- insert:
+    - id: dep-audit
+      name: '@deepwhale-cn/dsh-dep-audit'

@@ -1,0 +1,8 @@
+{
+  "id": "DEP-RANGE-WIDE",
+  "title": "依赖使用 >= 或 > 开放区间",
+  "severity": "low",
+  "source": "npm Docs — semver ranges：`>=x.y.z` 无上界，可能跨越 breaking change",
+  "advice": "`>=1.2.3` 没有上限，跨大版本时会引入不兼容改动。改成 `^1.2.3`（允许同大版本内升级）或精确版本。",
+  "check": { "type": "file-pattern", "pattern": "\"[^\"]+\":\\s*\">=?[0-9]", "paths": ["package.json"] }
+}

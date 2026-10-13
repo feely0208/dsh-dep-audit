@@ -1,0 +1,8 @@
+{
+  "id": "DEP-NO-LOCKFILE",
+  "title": "仓库没有 lockfile（依赖树不确定）",
+  "severity": "medium",
+  "source": "npm Docs — package-lock.json：锁定依赖树，保证不同环境安装出相同结果",
+  "advice": "没有 lockfile 时，`npm install` 每次可能装到不同版本 —— 今天构建通过、明天因为某个间接依赖发新版就挂了，或者悄悄引入了被投毒的版本。提交 lockfile 到版本控制。",
+  "check": { "type": "file-exists", "globs": ["package-lock.json", "pnpm-lock.yaml", "yarn.lock", "bun.lockb"], "require": true }
+}
