@@ -50,25 +50,25 @@
         <td><span class="dot" style="--c:#ea580c"></span>高</td>
         <td><div class="t">依赖带 install 生命周期脚本（投毒主要载体）</div><div class="src">npm Docs — scripts: preinstall/install/postinstall；近年来 npm 投毒事件（event-stream、ua-parser-js、node-ipc、colors/faker）均通过生命周期脚本执行任意代码</div></td>
         <td><code>node_modules/evil-postinstall/package.json</code><div class="ev">evil-postinstall@1.0.0 有脚本：postinstall</div></td>
-        <td class="adv">这类脚本在你 `npm install` 时执行 —— **不需要你 import 它**，装着就中招。请确认这个包是否真的需要安装期脚本（多数包不需要）。可用 npm 的 ignore-scripts 配置或 allow 列表收敛。</td>
+        <td class="adv">这类脚本在你 <code>npm install</code> 时执行 —— <b>不需要你 import 它</b>，装着就中招。请确认这个包是否真的需要安装期脚本（多数包不需要）。可用 npm 的 ignore-scripts 配置或 allow 列表收敛。</td>
       </tr>
       <tr class="sev-medium">
         <td><span class="dot" style="--c:#ca8a04"></span>中</td>
         <td><div class="t">仓库没有 lockfile（依赖树不确定）</div><div class="src">npm Docs — package-lock.json：锁定依赖树，保证不同环境安装出相同结果</div></td>
         <td><code>package-lock.json</code><div class="ev">以下任一均不存在：package-lock.json / pnpm-lock.yaml / yarn.lock / bun.lockb</div></td>
-        <td class="adv">没有 lockfile 时，`npm install` 每次可能装到不同版本 —— 今天构建通过、明天因为某个间接依赖发新版就挂了，或者悄悄引入了被投毒的版本。提交 lockfile 到版本控制。</td>
+        <td class="adv">没有 lockfile 时，<code>npm install</code> 每次可能装到不同版本 —— 今天构建通过、明天因为某个间接依赖发新版就挂了，或者悄悄引入了被投毒的版本。提交 lockfile 到版本控制。</td>
       </tr>
       <tr class="sev-medium">
         <td><span class="dot" style="--c:#ca8a04"></span>中</td>
-        <td><div class="t">依赖版本过宽（* 或 latest）</div><div class="src">npm Docs — semver: `*` 匹配任意版本；`latest` 表示 dist-tag 最新</div></td>
+        <td><div class="t">依赖版本过宽（* 或 latest）</div><div class="src">npm Docs — semver: <code>*</code> 匹配任意版本；<code>latest</code> 表示 dist-tag 最新</div></td>
         <td><code>package.json:6</code><div class="ev">&quot;unstable-lib&quot;: &quot;*&quot;</div></td>
-        <td class="adv">`*` / `latest` 等于把「装到哪个版本」交给上游决定 —— 上游发新版本（或被投毒）你立刻受影响，且无法复现。改成明确的 semver 范围或精确版本。</td>
+        <td class="adv"><code>*</code> / <code>latest</code> 等于把「装到哪个版本」交给上游决定 —— 上游发新版本（或被投毒）你立刻受影响，且无法复现。改成明确的 semver 范围或精确版本。</td>
       </tr>
       <tr class="sev-medium">
         <td><span class="dot" style="--c:#ca8a04"></span>中</td>
-        <td><div class="t">依赖版本过宽（* 或 latest）</div><div class="src">npm Docs — semver: `*` 匹配任意版本；`latest` 表示 dist-tag 最新</div></td>
+        <td><div class="t">依赖版本过宽（* 或 latest）</div><div class="src">npm Docs — semver: <code>*</code> 匹配任意版本；<code>latest</code> 表示 dist-tag 最新</div></td>
         <td><code>package.json:7</code><div class="ev">&quot;whatever&quot;: &quot;latest&quot;</div></td>
-        <td class="adv">`*` / `latest` 等于把「装到哪个版本」交给上游决定 —— 上游发新版本（或被投毒）你立刻受影响，且无法复现。改成明确的 semver 范围或精确版本。</td>
+        <td class="adv"><code>*</code> / <code>latest</code> 等于把「装到哪个版本」交给上游决定 —— 上游发新版本（或被投毒）你立刻受影响，且无法复现。改成明确的 semver 范围或精确版本。</td>
       </tr>
       <tr class="sev-medium">
         <td><span class="dot" style="--c:#ca8a04"></span>中</td>
@@ -84,14 +84,14 @@
       </tr>
       <tr class="sev-low">
         <td><span class="dot" style="--c:#0891b2"></span>低</td>
-        <td><div class="t">依赖使用 &gt;= 或 &gt; 开放区间</div><div class="src">npm Docs — semver ranges：`&gt;=x.y.z` 无上界，可能跨越 breaking change</div></td>
+        <td><div class="t">依赖使用 &gt;= 或 &gt; 开放区间</div><div class="src">npm Docs — semver ranges：<code>&gt;=x.y.z</code> 无上界，可能跨越 breaking change</div></td>
         <td><code>package.json:8</code><div class="ev">&quot;old-lib&quot;: &quot;&gt;=2</div></td>
-        <td class="adv">`&gt;=1.2.3` 没有上限，跨大版本时会引入不兼容改动。改成 `^1.2.3`（允许同大版本内升级）或精确版本。</td>
+        <td class="adv"><code>&gt;=1.2.3</code> 没有上限，跨大版本时会引入不兼容改动。改成 <code>^1.2.3</code>（允许同大版本内升级）或精确版本。</td>
       </tr></tbody></table>
 
   <footer>
     <p>扫描范围：<code>tests/fixtures/fail/demo-project</code> · 1 个文件</p>
-    <p>规则库：— · 生成时间：2026-10-13 02:05:54</p>
+    <p>规则库：— · 生成时间：2026-10-13 02:06:18</p>
     <p></p>
   </footer>
 </div></body></html>
