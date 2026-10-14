@@ -40,7 +40,11 @@ dsh-dep-audit --demo          # 看检出效果
 dsh-dep-audit --html r.html   # HTML 报告
 ```
 
-![dsh-dep-audit 的检查报告示例](https://www.deepwhale.org.cn/plugin-assets/dsh-dep-audit/report.png)
+![dsh-dep-audit 检查报告示例](https://www.deepwhale.org.cn/plugin-assets/dsh-dep-audit/report.png)
+
+![dsh-dep-audit 演示模式输出](https://www.deepwhale.org.cn/plugin-assets/dsh-dep-audit/demo.png)
+
+![dsh-dep-audit 规则与依据](https://www.deepwhale.org.cn/plugin-assets/dsh-dep-audit/rules.png)
 
 ## 边界
 
