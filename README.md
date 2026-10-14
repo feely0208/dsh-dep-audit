@@ -3,7 +3,7 @@
 [![Listed on dsh-plugin.org](https://dsh-plugin.org/badges/listed.svg)](https://dsh-plugin.org/plugins/feely0208/dsh-dep-audit)
 
 
-**关键词**：依赖投毒 · 供应链攻击 · npm 投毒 · 恶意依赖 · postinstall 脚本 · 供应链安全 · 依赖审计
+**关键词**：依赖投毒 · 供应链攻击 · 恶意依赖 · npm 投毒 · postinstall 脚本 · 供应链安全 · 依赖审计
 **Keywords**: dependency poisoning · supply chain attack · malicious package · npm supply chain · postinstall script
 **依赖投毒与风险** —— 装包即执行的脚本、过宽版本、非 registry 来源。
 
