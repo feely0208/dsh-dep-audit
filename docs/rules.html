@@ -1,0 +1,51 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="utf-8">
+<style>
+  * { box-sizing: border-box; }
+  body { margin:0; background:#0d0f13; display:flex; justify-content:center;
+         align-items:flex-start; padding:22px; font-family:-apple-system,"PingFang SC",
+         "Helvetica Neue",sans-serif; }
+  .win { width:1180px; border-radius:11px; overflow:hidden;
+          box-shadow:0 14px 44px rgba(0,0,0,.55); }
+  .bar { background:#2a2d34; padding:11px 15px; display:flex; align-items:center; gap:9px; }
+  .dot { width:12px; height:12px; border-radius:50%; }
+  .t { margin-left:11px; color:#7a8290; font-size:13px; letter-spacing:.02em; }
+  .term { background:#1b1d22; padding:20px 22px 24px; font-family:"SF Mono",Menlo,Consolas,
+           "PingFang SC",monospace; font-size:13.5px; line-height:1.72; }
+  .cmd { color:#5ee08a; margin-bottom:13px; font-size:13.5px; }
+  .cmd b { color:#fff; font-weight:600; }
+  .l { white-space:pre-wrap; word-break:break-word; }
+</style></head><body>
+  <div class="win">
+    <div class="bar">
+      <span class="dot" style="background:#ff5f57"></span>
+      <span class="dot" style="background:#febc2e"></span>
+      <span class="dot" style="background:#28c840"></span>
+      <span class="t">dsh-dep-audit · rules</span>
+    </div>
+    <div class="term">
+      <div class="cmd">$ <b>dsh-dep-audit --list-rules</b></div>
+      <div class="l"><span style="color:#7a8290">&nbsp;</span></div>
+<div class="l"><span style="color:#d8dee9">  深鲸守护 · 依赖投毒与风险 —— 5 条规则</span></div>
+<div class="l"><span style="color:#7a8290">&nbsp;</span></div>
+<div class="l"><span style="color:#d8dee9">  [high] DEP-LIFECYCLE</span></div>
+<div class="l"><span style="color:#d8dee9">        依赖带 install 生命周期脚本（投毒主要载体）</span></div>
+<div class="l"><span style="color:#7a8290">        依据：npm Docs — scripts: preinstall/install/postinstall；近年来 npm 投毒事件（event-stream、ua-parser-js、node-ipc、colors/faker）均通过生命周期脚本执行任意代码</span></div>
+<div class="l"><span style="color:#7a8290">&nbsp;</span></div>
+<div class="l"><span style="color:#d8dee9">  [medium] DEP-NO-LOCKFILE</span></div>
+<div class="l"><span style="color:#d8dee9">        仓库没有 lockfile（依赖树不确定）</span></div>
+<div class="l"><span style="color:#7a8290">        依据：npm Docs — package-lock.json：锁定依赖树，保证不同环境安装出相同结果</span></div>
+<div class="l"><span style="color:#7a8290">&nbsp;</span></div>
+<div class="l"><span style="color:#d8dee9">  [medium] DEP-WILDCARD</span></div>
+<div class="l"><span style="color:#d8dee9">        依赖版本过宽（* 或 latest）</span></div>
+<div class="l"><span style="color:#7a8290">        依据：npm Docs — semver: `*` 匹配任意版本；`latest` 表示 dist-tag 最新</span></div>
+<div class="l"><span style="color:#7a8290">&nbsp;</span></div>
+<div class="l"><span style="color:#d8dee9">  [medium] DEP-INSECURE-SOURCE</span></div>
+<div class="l"><span style="color:#d8dee9">        依赖来自非 registry 来源（git / http / 本地路径）</span></div>
+<div class="l"><span style="color:#7a8290">        依据：npm Docs — package.json 依赖协议：git+ / http:// / file: / link:；npm Docs — 供应链安全建议</span></div>
+<div class="l"><span style="color:#7a8290">&nbsp;</span></div>
+<div class="l"><span style="color:#d8dee9">  [low] DEP-RANGE-WIDE</span></div>
+<div class="l"><span style="color:#d8dee9">        依赖使用 &gt;= 或 &gt; 开放区间</span></div>
+<div class="l"><span style="color:#7a8290">        依据：npm Docs — semver ranges：`&gt;=x.y.z` 无上界，可能跨越 breaking change</span></div>
+    </div>
+  </div>
+</body></html>

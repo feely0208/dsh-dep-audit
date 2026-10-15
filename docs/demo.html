@@ -1,0 +1,75 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="utf-8">
+<style>
+  * { box-sizing: border-box; }
+  body { margin:0; background:#0d0f13; display:flex; justify-content:center;
+         align-items:flex-start; padding:22px; font-family:-apple-system,"PingFang SC",
+         "Helvetica Neue",sans-serif; }
+  .win { width:1180px; border-radius:11px; overflow:hidden;
+          box-shadow:0 14px 44px rgba(0,0,0,.55); }
+  .bar { background:#2a2d34; padding:11px 15px; display:flex; align-items:center; gap:9px; }
+  .dot { width:12px; height:12px; border-radius:50%; }
+  .t { margin-left:11px; color:#7a8290; font-size:13px; letter-spacing:.02em; }
+  .term { background:#1b1d22; padding:20px 22px 24px; font-family:"SF Mono",Menlo,Consolas,
+           "PingFang SC",monospace; font-size:13.5px; line-height:1.72; }
+  .cmd { color:#5ee08a; margin-bottom:13px; font-size:13.5px; }
+  .cmd b { color:#fff; font-weight:600; }
+  .l { white-space:pre-wrap; word-break:break-word; }
+</style></head><body>
+  <div class="win">
+    <div class="bar">
+      <span class="dot" style="background:#ff5f57"></span>
+      <span class="dot" style="background:#febc2e"></span>
+      <span class="dot" style="background:#28c840"></span>
+      <span class="t">dsh-dep-audit · demo</span>
+    </div>
+    <div class="term">
+      <div class="cmd">$ <b>dsh-dep-audit --demo</b></div>
+      <div class="l"><span style="color:#7a8290">&nbsp;</span></div>
+<div class="l"><span style="color:#d8dee9">  【演示模式】使用内置样本，不是你的真实项目。</span></div>
+<div class="l"><span style="color:#7a8290">&nbsp;</span></div>
+<div class="l"><span style="color:#7a8290">&nbsp;</span></div>
+<div class="l"><span style="color:#d8dee9">  深鲸守护 · 依赖投毒与风险 v0.1.0</span></div>
+<div class="l"><span style="color:#d8dee9">  ──────────────────────────────────────────────────────────────────</span></div>
+<div class="l"><span style="color:#d8dee9">  扫描范围   内置演示样本 · 故意有问题的项目</span></div>
+<div class="l"><span style="color:#d8dee9">             1 个文件 · 1 个目录已跳过</span></div>
+<div class="l"><span style="color:#d8dee9">  检查规则   5/5 条</span></div>
+<div class="l"><span style="color:#ffd166">  命中       7 条</span></div>
+<div class="l"><span style="color:#7a8290">&nbsp;</span></div>
+<div class="l"><span style="color:#ff6b6b">  【高】1 条</span></div>
+<div class="l"><span style="color:#7a8290">    · 依赖带 install 生命周期脚本（投毒主要载体）</span></div>
+<div class="l"><span style="color:#d8dee9">      位置  node_modules/evil-postinstall/package.json</span></div>
+<div class="l"><span style="color:#7a8290">      证据  evil-postinstall@1.0.0 有脚本：postinstall</span></div>
+<div class="l"><span style="color:#7a8290">      依据  npm Docs — scripts: preinstall/install/postinstall；近年来 npm 投毒事件（event-stream、ua-parser-js、node-ipc、colors/faker）均通过生命周期脚本执行任意代码</span></div>
+<div class="l"><span style="color:#d8dee9">      建议  这类脚本在你 `npm install` 时执行 —— **不需要你 import 它**，装着就中招。请确认这个包是否真的需要安装期脚本（多数包不需要）。可用 npm 的 ignore-scripts 配置或 allow 列表收敛。</span></div>
+<div class="l"><span style="color:#7a8290">&nbsp;</span></div>
+<div class="l"><span style="color:#ffd166">  【中】5 条</span></div>
+<div class="l"><span style="color:#7a8290">    · 仓库没有 lockfile（依赖树不确定）</span></div>
+<div class="l"><span style="color:#d8dee9">      位置  package-lock.json</span></div>
+<div class="l"><span style="color:#7a8290">      证据  以下任一均不存在：package-lock.json / pnpm-lock.yaml / yarn.lock / bun.lockb</span></div>
+<div class="l"><span style="color:#7a8290">      依据  npm Docs — package-lock.json：锁定依赖树，保证不同环境安装出相同结果</span></div>
+<div class="l"><span style="color:#d8dee9">      建议  没有 lockfile 时，`npm install` 每次可能装到不同版本 —— 今天构建通过、明天因为某个间接依赖发新版就挂了，或者悄悄引入了被投毒的版本。提交 lockfile 到版本控制。</span></div>
+<div class="l"><span style="color:#7a8290">    · 依赖版本过宽（* 或 latest）</span></div>
+<div class="l"><span style="color:#d8dee9">      位置  package.json:6</span></div>
+<div class="l"><span style="color:#7a8290">      证据  &quot;unstable-lib&quot;: &quot;*&quot;</span></div>
+<div class="l"><span style="color:#7a8290">      依据  npm Docs — semver: `*` 匹配任意版本；`latest` 表示 dist-tag 最新</span></div>
+<div class="l"><span style="color:#d8dee9">      建议  `*` / `latest` 等于把「装到哪个版本」交给上游决定 —— 上游发新版本（或被投毒）你立刻受影响，且无法复现。改成明确的 semver 范围或精确版本。</span></div>
+<div class="l"><span style="color:#7a8290">    · 依赖版本过宽（* 或 latest）</span></div>
+<div class="l"><span style="color:#d8dee9">      位置  package.json:7</span></div>
+<div class="l"><span style="color:#7a8290">      证据  &quot;whatever&quot;: &quot;latest&quot;</span></div>
+<div class="l"><span style="color:#7a8290">      依据  npm Docs — semver: `*` 匹配任意版本；`latest` 表示 dist-tag 最新</span></div>
+<div class="l"><span style="color:#d8dee9">      建议  `*` / `latest` 等于把「装到哪个版本」交给上游决定 —— 上游发新版本（或被投毒）你立刻受影响，且无法复现。改成明确的 semver 范围或精确版本。</span></div>
+<div class="l"><span style="color:#7a8290">    · 依赖来自非 registry 来源（git / http / 本地路径）</span></div>
+<div class="l"><span style="color:#d8dee9">      位置  package.json:9</span></div>
+<div class="l"><span style="color:#7a8290">      证据  &quot;internal-lib&quot;: &quot;git+</span></div>
+<div class="l"><span style="color:#7a8290">      依据  npm Docs — package.json 依赖协议：git+ / http:// / file: / link:；npm Docs — 供应链安全建议</span></div>
+<div class="l"><span style="color:#d8dee9">      建议  这类依赖绕过 registry 的完整性校验与审计，且 http:// 明文传输。git 依赖还常指向分支（内容会变）。若非必要，改成 registry 上的正式包；必须用 git 时锁定到 commit SHA。</span></div>
+<div class="l"><span style="color:#7a8290">    · 依赖来自非 registry 来源（git / http / 本地路径）</span></div>
+<div class="l"><span style="color:#d8dee9">      位置  package.json:10</span></div>
+<div class="l"><span style="color:#7a8290">      证据  &quot;insecure-lib&quot;: &quot;http://</span></div>
+<div class="l"><span style="color:#7a8290">      依据  npm Docs — package.json 依赖协议：git+ / http:// / file: / link:；npm Docs — 供应链安全建议</span></div>
+<div class="l"><span style="color:#d8dee9">      建议  这类依赖绕过 registry 的完整性校验与审计，且 http:// 明文传输。git 依赖还常指向分支（内容会变）。若非必要，改成 registry 上的正式包；必须用 git 时锁定到 commit SHA。</span></div>
+<div class="l"><span style="color:#7a8290">&nbsp;</span></div>
+<div class="l"><span style="color:#5ee08a">  【低】1 条</span></div><div class="l" style="color:#7a8290">…（输出过长已截断）</div>
+    </div>
+  </div>
+</body></html>
