@@ -12,7 +12,9 @@
     "skill",
     "security",
     "guard",
-    "dep-audit"
+    "dep-audit",
+    "供应链攻击",
+    "恶意依赖"
   ],
   "files": [
     "lib",
